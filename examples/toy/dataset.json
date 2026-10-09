@@ -1,0 +1,10 @@
+{
+  "name": "toy-music",
+  "episodes": "episodes.jsonl",
+  "tasks": "tasks.jsonl",
+  "app_descriptions": {"music": "Find and follow artists"},
+  "operations": [
+    {"operation":"tools.music.search_artist","app":"music","function_name":"search_artist","access_mode":"read","http_method":"GET","required_parameters":["artist_name"],"output_slots":["artist_id"]},
+    {"operation":"tools.music.follow_artist","app":"music","function_name":"follow_artist","access_mode":"write","http_method":"POST","required_parameters":["artist_id"],"output_slots":["followed"]}
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "dataset_config": "dataset.json",
+  "environment_factory": "agent_env:make_environment",
+  "provider": {"type": "scripted", "responses": "agent_responses.json"},
+  "trials": 2,
+  "output": "output/agent_result.json"
+}

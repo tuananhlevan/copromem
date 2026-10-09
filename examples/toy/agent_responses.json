@@ -1,0 +1,8 @@
+[
+  {"role":"assistant","content":null,"tool_calls":[{"id":"search-1","type":"function","function":{"name":"search_artist","arguments":"{\"artist_name\":\"A\"}"}}]},
+  {"role":"assistant","content":null,"tool_calls":[{"id":"follow-1","type":"function","function":{"name":"follow_artist","arguments":"{\"artist_id\":\"id-A\"}"}}]},
+  {"role":"assistant","content":"Artist followed."},
+  {"role":"assistant","content":null,"tool_calls":[{"id":"search-2","type":"function","function":{"name":"search_artist","arguments":"{\"artist_name\":\"B\"}"}}]},
+  {"role":"assistant","content":null,"tool_calls":[{"id":"follow-2","type":"function","function":{"name":"follow_artist","arguments":"{\"artist_id\":\"id-B\"}"}}]},
+  {"role":"assistant","content":"Artist followed."}
+]

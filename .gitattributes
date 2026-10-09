@@ -1,0 +1,3 @@
+# WSL launchers are executed directly by /usr/bin/env; CRLF makes the
+# interpreter name ``bash\r`` and fails before the protected environment is read.
+*.sh text eol=lf
