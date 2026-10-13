@@ -44,6 +44,10 @@ environment = make_alfworld_environment(
 
 With `ALFWORLD_DATA_ROOT` and `ALFWORLD_GAMEFILE` set, run `python examples/alfworld_native.py` for a zero-provider native smoke. The environment exposes only `tools.alfworld.execute_command`. Each trial owns and closes its native worker. The adapter neither downloads benchmark data nor sends it to a provider; the caller chooses the provider and must protect task data under its benchmark licence.
 
+### Optional AppWorld native adapter
+
+`copromem.appworld` follows the same pattern for a separately installed AppWorld task. It lazy-loads AppWorld, exposes its safe native Python execution boundary as `tools.appworld.execute_python`, uses the official scorer, and closes each task worker. Set `APPWORLD_TASK_ID` in an AppWorld environment you are licensed to use, then run `python examples/appworld_native.py` for the zero-provider native smoke. The example deliberately executes only `pass`; it tests the integration and does not claim to solve a benchmark task.
+
 ## Quick task-boundary API
 
 ```python

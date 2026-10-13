@@ -11,6 +11,7 @@ from .admission import (admission_receipt, admit_agent_report, multi_schema_admi
 from .intents import build_intent_registry, build_intent_registry_from_openapi, verify_intent_registry
 from .retrieval import external_retrieval_policy
 from .alfworld import AlfWorldSession, AlfWorldUnavailableError, alfworld_tool, make_alfworld_environment
+from .appworld import AppWorldSession, AppWorldUnavailableError, appworld_tool, make_appworld_environment
 
 __all__ = ["CoProMem", "run", "run_agent", "ChatProvider", "Tool", "ToolRegistry", "ToolAgent",
            "AgentEnvironment", "AgentPipeline", "OpenRouterProvider", "ScriptedProvider",
@@ -18,4 +19,5 @@ __all__ = ["CoProMem", "run", "run_agent", "ChatProvider", "Tool", "ToolRegistry
            "multi_schema_admission_bundle", "schema_identity", "verify_multi_schema_admission",
            "build_intent_registry", "build_intent_registry_from_openapi", "verify_intent_registry",
            "external_retrieval_policy", "AlfWorldSession", "AlfWorldUnavailableError", "alfworld_tool",
-           "make_alfworld_environment"]
+           "make_alfworld_environment", "AppWorldSession", "AppWorldUnavailableError", "appworld_tool",
+           "make_appworld_environment"]
