@@ -206,6 +206,11 @@ tempCodeRunnerFile.py
 
 # Local benchmark evidence and live runtime state are never source artifacts.
 /artifacts/
+/runs/
+/logs/
+/data/
+/checkpoints/
+*.jsonl.lock
 
 # Local datasets, comparison repos, old experiment output and draft paper.
 /external/

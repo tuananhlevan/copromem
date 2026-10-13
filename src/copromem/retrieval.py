@@ -1,4 +1,4 @@
-"""Semantic-spine retrieval for CoProMem."""
+﻿"""Semantic-spine retrieval for CoProMem."""
 from __future__ import annotations
 
 import json
@@ -41,7 +41,15 @@ def frozen_policy() -> dict[str, Any]:
 
 
 def external_retrieval_policy() -> dict[str, Any]:
-    value = {"base_policy_sha256": frozen_policy()["policy_sha256"],
+    """The public admitted terminal-slice retrieval policy.
+
+    The learning core remains the ordinary semantic-spine core.  This policy
+    only governs retrieval from independently admitted schemas: it may render
+    one unambiguous terminal slice for a task-relevant public application, and
+    never renders an unproven learned prerequisite.
+    """
+    value = {"version": "copromem-admitted-relevant-app-terminal-slice",
+             "base_policy_sha256": frozen_policy()["policy_sha256"],
              "terminal_evidence": "exact_public_intent_or_task_relevant_public_app",
              "admission": "independently_attested_schema_semantic_identities",
              "selection": "one_terminal_slice_equivalence_class_or_empty_guidance",

@@ -1,5 +1,7 @@
 """CoProMem: dataset-independent procedural memory."""
 
+__version__ = "0.2.0"
+
 from .pipeline import CoProMem, run
 from .agent import AgentEnvironment, AgentPipeline, ChatProvider, Tool, ToolAgent, ToolRegistry
 from .agent_run import run_agent
