@@ -143,6 +143,7 @@ class AgentEnvironment:
 
     tools: ToolRegistry
     score: Callable[[str], bool]
+    close: Callable[[], None] | None = None
 
 
 class ToolAgent:
@@ -276,15 +277,19 @@ class AgentPipeline:
             if {row["operation"]: row for row in environment.tools.registry_rows()} != registry_rows:
                 raise ValueError("environment tools do not match the frozen public registry")
             instruction = str(_field(task, self.memory.task_fields, "instruction"))
-            trace = self.agent.run(instruction, prepared["guidance"], environment.tools)
-            scored = environment.score(trace["answer"])
-            if type(scored) is not bool:
-                raise ValueError("environment scorer must return a boolean")
-            calls = [self._mapped_row(call, self.memory.call_fields) for call in trace["calls"]]
-            episodes.append(self._mapped_row({"task_id": prepared["task_id"],
-                                             "success": scored, "calls": calls},
-                                            self.memory.episode_fields))
-            traces.append({"trial": trial, "success": scored, **trace})
+            try:
+                trace = self.agent.run(instruction, prepared["guidance"], environment.tools)
+                scored = environment.score(trace["answer"])
+                if type(scored) is not bool:
+                    raise ValueError("environment scorer must return a boolean")
+                calls = [self._mapped_row(call, self.memory.call_fields) for call in trace["calls"]]
+                episodes.append(self._mapped_row({"task_id": prepared["task_id"],
+                                                 "success": scored, "calls": calls},
+                                                self.memory.episode_fields))
+                traces.append({"trial": trial, "success": scored, **trace})
+            finally:
+                if environment.close is not None:
+                    environment.close()
         update = self.memory.learn(prepared["task_id"], episodes, expected_trials=trials) if learn else None
         return {"task_id": prepared["task_id"], "prepared": prepared,
                 "pre_state_sha256": pre_state_sha256, "trials": traces, "update": update,

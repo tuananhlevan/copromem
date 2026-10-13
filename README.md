@@ -29,6 +29,21 @@ python examples/safe_retrieval.py
 
 The last command is a zero-provider smoke pilot: it creates an admitted in-memory terminal schema and verifies that safe guidance is retrieved. It does not contact a model, embedding service, or benchmark environment.
 
+### Optional ALFWorld native adapter
+
+`copromem.alfworld` connects the same provider-neutral tool boundary to one locally installed ALFWorld TextWorld game. It is lazy-loaded: importing CoProMem never imports ALFWorld. Install ALFWorld and its native dependencies separately, use data for which you have permission, then provide a split root and one `game.tw-pddl` path:
+
+```python
+from copromem import make_alfworld_environment
+
+environment = make_alfworld_environment(
+    gamefile="/licensed/alfworld-data/.../game.tw-pddl",
+    data_root="/licensed/alfworld-data/json_2.1.1/train",
+)
+```
+
+With `ALFWORLD_DATA_ROOT` and `ALFWORLD_GAMEFILE` set, run `python examples/alfworld_native.py` for a zero-provider native smoke. The environment exposes only `tools.alfworld.execute_command`. Each trial owns and closes its native worker. The adapter neither downloads benchmark data nor sends it to a provider; the caller chooses the provider and must protect task data under its benchmark licence.
+
 ## Quick task-boundary API
 
 ```python

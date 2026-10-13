@@ -10,10 +10,12 @@ from .admission import (admission_receipt, admit_agent_report, multi_schema_admi
                         schema_identity, verify_admission, verify_multi_schema_admission)
 from .intents import build_intent_registry, build_intent_registry_from_openapi, verify_intent_registry
 from .retrieval import external_retrieval_policy
+from .alfworld import AlfWorldSession, AlfWorldUnavailableError, alfworld_tool, make_alfworld_environment
 
 __all__ = ["CoProMem", "run", "run_agent", "ChatProvider", "Tool", "ToolRegistry", "ToolAgent",
            "AgentEnvironment", "AgentPipeline", "OpenRouterProvider", "ScriptedProvider",
            "admission_receipt", "admit_agent_report", "verify_admission",
            "multi_schema_admission_bundle", "schema_identity", "verify_multi_schema_admission",
            "build_intent_registry", "build_intent_registry_from_openapi", "verify_intent_registry",
-           "external_retrieval_policy"]
+           "external_retrieval_policy", "AlfWorldSession", "AlfWorldUnavailableError", "alfworld_tool",
+           "make_alfworld_environment"]
