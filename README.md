@@ -42,7 +42,11 @@ environment = make_alfworld_environment(
 )
 ```
 
-With `ALFWORLD_DATA_ROOT` and `ALFWORLD_GAMEFILE` set, run `python examples/alfworld_native.py` for a zero-provider native smoke. The environment exposes only `tools.alfworld.execute_command`. Each trial owns and closes its native worker. The adapter neither downloads benchmark data nor sends it to a provider; the caller chooses the provider and must protect task data under its benchmark licence.
+With `ALFWORLD_DATA_ROOT` and `ALFWORLD_GAMEFILE` set, run `python examples/alfworld_native.py` for a three-trial, zero-provider native integration gate. All three trials use the same game file, with a fresh scripted provider and a freshly reset, separately closed native worker for each trial. The environment exposes only `tools.alfworld.execute_command`.
+
+The JSON report retains every trial's native score, including failures, plus `native_successes` and their mean `native_success_avg_at_3`. The gate passes when all three scripted `look` calls complete through the native boundary; a worker/tool failure fails the gate. A false native task score remains false and does not fail this integration check. This smoke does not solve the task or reproduce ALFWorld benchmark success rates. The core learning rule and generic runner defaults are unchanged.
+
+`python -m pytest tests/test_alfworld_gate.py` checks this contract offline with controlled native workers. CI runs these contract tests without downloading ALFWorld or contacting a model. The adapter neither downloads benchmark data nor sends it to a provider; the caller chooses the provider and must protect task data under its benchmark licence.
 
 ### Optional AppWorld native adapter
 
