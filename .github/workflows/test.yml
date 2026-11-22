@@ -17,7 +17,8 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: python -m pip install --upgrade pip
       - run: python -m pip install -e '.[test]'
-      - run: python -m pytest
+      - name: Unit tests and ALFWorld three-trial contract
+        run: python -m pytest
       - run: python examples/safe_retrieval.py
       - run: copromem examples/toy/run.json
       - run: copromem agent examples/toy/agent_run.json
